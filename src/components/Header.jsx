@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Search, MapPin, ShoppingBag } from 'lucide-react';
+import { Search, MapPin, ShoppingBag, Info } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 
 export default function Header() {
@@ -18,6 +18,9 @@ export default function Header() {
           <input type="text" placeholder="Search for restaurant, cuisine or a dish" />
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
+          <Link to="/overview" style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}>
+            <Info size={22} />
+          </Link>
           <span style={{ cursor: 'pointer' }}>Log in</span>
           <span style={{ cursor: 'pointer' }}>Sign up</span>
           <div onClick={toggleDrawer} style={{ position: 'relative', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
