@@ -18,8 +18,9 @@ export default function Header() {
           <input type="text" placeholder="Search for restaurant, cuisine or a dish" />
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontSize: '1.1rem', color: 'var(--text-secondary)' }}>
-          <Link to="/overview" style={{ color: 'inherit', display: 'flex', alignItems: 'center' }}>
-            <Info size={22} />
+          <Link to="/overview" style={{ color: 'inherit', display: 'flex', alignItems: 'center', gap: '6px', textDecoration: 'none' }}>
+            <Info size={20} />
+            <span style={{ cursor: 'pointer' }}>Help</span>
           </Link>
           <span style={{ cursor: 'pointer' }}>Log in</span>
           <span style={{ cursor: 'pointer' }}>Sign up</span>
