@@ -58,25 +58,10 @@ export default function JudgeMode() {
             Quickly navigate to the core GenAI innovations built for this competition.
           </p>
 
-          <div style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: '8px', marginBottom: '24px' }}>
-            <h4 style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--text-primary)' }}>What is this project?</h4>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
-              This is a GenAI-powered redesign of Zomato's core experience. It replaces manual scrolling with conversational intelligence.
-              
-              <div style={{ marginTop: '12px', fontWeight: '600', color: 'var(--text-primary)' }}>Live Working Features:</div>
-              <ul style={{ margin: '4px 0 0 0', paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <li><strong>AI Concierge:</strong> Tap the floating Zomato AI button to chat and get personalized meal cards.</li>
-                <li><strong>Group Ordering:</strong> Auto-generates a balanced group cart from varied dietary inputs under a single budget.</li>
-                <li><strong>Auto-Reorder Agent:</strong> Setup rules (e.g., "Post-Gym") to automatically generate carts at specific times.</li>
-                <li><strong>Food Twin:</strong> A persistent memory profile that learns your taste over time.</li>
-                <li><strong>Smart Cart:</strong> Seamlessly add AI recommendations and group carts together with live calculation.</li>
-              </ul>
-            </div>
-          </div>
-
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, overflowY: 'auto' }}>
             <HighlightLink to="/twin" title="Food Twin" desc="Persistent AI profile & memory" onClick={() => setIsOpen(false)} />
             <HighlightLink to="/agent" title="Auto-Reorder Agent" desc="Automated scheduled ordering" onClick={() => setIsOpen(false)} />
+            <HighlightLink to="/overview" title="Project Overview" desc="How this AI redesign works" onClick={() => setIsOpen(false)} />
           </div>
         </div>
       )}

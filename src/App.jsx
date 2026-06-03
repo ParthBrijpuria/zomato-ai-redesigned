@@ -7,6 +7,7 @@ import AutoAgent from './pages/AutoAgent';
 import Checkout from './pages/Checkout';
 import Architecture from './pages/Architecture';
 import BusinessImpact from './pages/BusinessImpact';
+import Overview from './pages/Overview';
 import Header from './components/Header';
 import JudgeMode from './components/JudgeMode';
 import { CartProvider } from './contexts/CartContext';
@@ -30,6 +31,7 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/architecture" element={<Architecture />} />
               <Route path="/impact" element={<BusinessImpact />} />
+              <Route path="/overview" element={<Overview />} />
             </Routes>
           </main>
         </div>
