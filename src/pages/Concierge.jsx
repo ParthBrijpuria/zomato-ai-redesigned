@@ -73,7 +73,7 @@ export default function Concierge() {
             <div style={{ display: 'inline-flex', padding: '16px', background: 'var(--ai-purple-light)', borderRadius: '50%', marginBottom: '16px' }}>
               <Sparkles size={40} color="var(--ai-purple)" />
             </div>
-            <h1 style={{ fontSize: '1.75rem', marginBottom: '8px' }}>👋 Hi Parth</h1>
+            <h1 style={{ fontSize: '1.75rem', marginBottom: '8px' }}>👋 Hi User</h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '32px' }}>What would you like today?</p>
             
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', maxWidth: '600px', margin: '0 auto' }}>
@@ -182,6 +182,7 @@ export function RecommendationCard({ data, source = 'concierge' }) {
   const [explainOpen, setExplainOpen] = useState(false);
   const { addToCart, removeFromCart } = useCart();
   const [addedId, setAddedId] = useState(null);
+  const [addedAddons, setAddedAddons] = useState(new Set());
 
   const handleAdd = () => {
     const id = addToCart(data, source);
@@ -191,7 +192,24 @@ export function RecommendationCard({ data, source = 'concierge' }) {
   const handleUndo = () => {
     removeFromCart(addedId);
     setAddedId(null);
+    setAddedAddons(new Set()); // Reset addons when main item is removed
   };
+
+  const handleAddAddon = (addon) => {
+    addToCart({
+      type: 'recommendations',
+      mealName: addon.name,
+      restaurant: data.restaurant,
+      price: `₹${addon.price}`,
+      quantity: 1
+    }, source);
+    setAddedAddons(prev => new Set(prev).add(addon.id));
+  };
+
+  const addons = [
+    { id: 'a1', name: 'Protein Shake', price: 120 },
+    { id: 'a2', name: 'Greek Yogurt', price: 80 }
+  ];
 
   return (
     <div className="card" style={{ padding: 0, overflow: 'hidden', maxWidth: '600px' }}>
@@ -251,8 +269,23 @@ export function RecommendationCard({ data, source = 'concierge' }) {
             <div style={{ border: '1px dashed var(--ai-purple)', borderRadius: '8px', padding: '12px', background: 'var(--ai-purple-light)' }}>
               <h5 style={{ margin: '0 0 8px 0', color: 'var(--ai-purple)', display: 'flex', alignItems: 'center', gap: '4px' }}><Sparkles size={14} /> AI Suggested Add-ons</h5>
               <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
-                <button className="chip" style={{ fontSize: '0.8rem', padding: '6px 12px', flexShrink: 0 }}>+ Protein Shake (₹120)</button>
-                <button className="chip" style={{ fontSize: '0.8rem', padding: '6px 12px', flexShrink: 0 }}>+ Greek Yogurt (₹80)</button>
+                {addons.map(addon => (
+                  <button 
+                    key={addon.id}
+                    className="chip" 
+                    onClick={() => !addedAddons.has(addon.id) && handleAddAddon(addon)}
+                    style={{ 
+                      fontSize: '0.8rem', 
+                      padding: '6px 12px', 
+                      flexShrink: 0,
+                      background: addedAddons.has(addon.id) ? 'var(--success-green)' : 'white',
+                      color: addedAddons.has(addon.id) ? 'white' : 'var(--text-primary)',
+                      borderColor: addedAddons.has(addon.id) ? 'var(--success-green)' : 'var(--border-light)'
+                    }}
+                  >
+                    {addedAddons.has(addon.id) ? `✓ Added ${addon.name}` : `+ ${addon.name} (₹${addon.price})`}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
